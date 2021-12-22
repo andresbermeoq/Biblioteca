@@ -35,7 +35,12 @@ public class LibroBean implements Serializable {
 	private String title;
 	private Integer autor;
 	
+	private Integer id;
+	
 	private Capitulo capitulo;
+	
+	private String nombre_busqueda;
+	private String nacionalidad_busqueda;
 	
 	@EJB
 	private LibroFacade libroFacade;
@@ -46,12 +51,17 @@ public class LibroBean implements Serializable {
 	private Libro libro;
 	
 	private List<Capitulo> capitulos;
+	private List<Libro> libros;
+	
+	private String nameSearch;
+	private String titleSearch;
 	
 	@PostConstruct
 	public void init() {
 		capitulos = new ArrayList<>();
 		libro = new Libro();
 		capitulo = new Capitulo();
+		setLibros(libroFacade.findAll());
 	}
 
 	public LibroBean() {
@@ -174,8 +184,91 @@ public class LibroBean implements Serializable {
 		
 		capitulos = new ArrayList<Capitulo>();
 		libro = new Libro();
+		setLibros(libroFacade.findAll());
 		
 	}
+	
+	public void searchID() {
+		Autor autor_busqueda = autorFacade.find(this.id);
+		this.nombre_busqueda = autor_busqueda.getNombre();
+		this.nacionalidad_busqueda = autor_busqueda.getNacionalidad();
+	}
+	
+	public void searchbyName() {
+		libros = new ArrayList<Libro>();
+		libros = libroFacade.findbyName(this.nameSearch);
+		this.nameSearch = new String();
+	}
+	
+	public void searchbyTitle() {
+		libros = new ArrayList<Libro>();
+		libros = libroFacade.findbyTitle(this.titleSearch);
+		System.out.println("libros titulo " + libros);
+		this.titleSearch = new String();	
+	}
+	
+	public void reupdateTheList() {
+		libros = libroFacade.findAll();
+		this.titleSearch = new String();
+		this.isbn = new String();
+		this.nombre = new String();
+		this.capitulos = new ArrayList<Capitulo>();
+		this.number = new String();
+		this.title = new String();
+		
+	}
+
+	public List<Libro> getLibros() {
+		return libros;
+	}
+
+	public void setLibros(List<Libro> libros) {
+		this.libros = libros;
+	}
+
+	public String getNameSearch() {
+		return nameSearch;
+	}
+
+	public void setNameSearch(String nameSearch) {
+		this.nameSearch = nameSearch;
+	}
+
+	public String getTitleSearch() {
+		return titleSearch;
+	}
+
+	public void setTitleSearch(String titleSearch) {
+		this.titleSearch = titleSearch;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNombre_busqueda() {
+		return nombre_busqueda;
+	}
+
+	public void setNombre_busqueda(String nombre_busqueda) {
+		this.nombre_busqueda = nombre_busqueda;
+	}
+
+	public String getNacionalidad_busqueda() {
+		return nacionalidad_busqueda;
+	}
+
+	public void setNacionalidad_busqueda(String nacionalidad_busqueda) {
+		this.nacionalidad_busqueda = nacionalidad_busqueda;
+	}
+
+	
+	
+	
 
 	
 

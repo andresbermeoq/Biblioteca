@@ -56,6 +56,7 @@ public class AutorBean implements Serializable {
 	
 	public String addAuthor() {
 		autorFacade.create(new Autor(this.nameAuthor, this.nationalizationAuthor));
+		autors = autorFacade.findAll();
 		return null;
 	}
 

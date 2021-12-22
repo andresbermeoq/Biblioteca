@@ -7,56 +7,210 @@
 
 	<h:head>
 		<title>Ingreso de Libros</title>
+		
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
 	</h:head>
 	
 	<h:body>
-		<h1>Agrega un Libro</h1>
-		
-		
+	
+		<div class="container">
+			<div class="container align-items-center">
+				<h1>Libros</h1>
+			</div>
+			
+			<br />
+			
 		<h:form>
 		
-			<h5>Numero del Capitulo</h5>
-		    <span class="ui-float-label">
-		       <p:inputText value="#{libroBean.number}"/>
-		       <p:outputLabel value="Numbero Del Capitulo"/>
-		   	</span>
-		   	
-		   	<h5>Nombre</h5>
-		    <span class="ui-float-label">
-		       <p:inputText value="#{libroBean.title}"/>
-		       <p:outputLabel value="Titulo Del Capitulo"/>
-		   	</span>
-		   		   
-		   	<h5>Autor</h5>	
-			<p:selectOneMenu value="#{libroBean.autor}">
-				<f:selectItem itemLabel="Select One" itemValue=""/>
-				<f:selectItems value="#{autorBean.autors}" var="autor" itemLabel="#{autor.nombre}" itemValue="#{autor.codigo}"/>
-			</p:selectOneMenu>
-		
-			<h:commandButton action="#{libroBean.addCapitulo()}" value="Agrega" />
+			<div class="container row g-3 align-items-center border border-5">
 			
-			<h5>ISBN</h5>
-		    <span class="ui-float-label">
-		       <p:inputText value="#{libroBean.isbn}"/>
-		       <p:outputLabel value="ISBN"/>
-		   	</span>
+				<div class="col-auto">
+					<span class="ui-float-label">
+				       <p:inputText class="form-control form-control-lg" value="#{libroBean.isbn}"/>
+				       <p:outputLabel value="ISBN"/>
+				   	</span>
+				</div>
+				
+				<div class="col-auto">
+					<span class="ui-float-label">
+				       <p:inputText class="form-control form-control-lg" value="#{libroBean.nombre}"/>
+				       <p:outputLabel value="Nombre Del Libro"/>
+				   	</span>
+				</div>
+				
+				<div class="col-auto">
+					<span class="ui-float-label">
+				       <p:inputText class="form-control form-control-lg" value="#{libroBean.number_pages}"/>
+				       <p:outputLabel value="Numero de paginas"/>
+				   	</span>
+				</div>
+				
+				<br />
+			
+				<div class="container row g-3 align-items-center border border-4">
+			
+				<h3>Seleccione Capitulos</h3>
+			
+				<div class="col-auto">
+					<span class="ui-float-label">
+				       <p:inputText value="#{libroBean.number}"/>
+				       <p:outputLabel value="Numero Del Capitulo"/>
+			   		</span>
+				</div>
+				
+				<div class="col-auto">
+					<span class="ui-float-label">
+				       <p:inputText value="#{libroBean.title}"/>
+				       <p:outputLabel value="Titulo Del Capitulo"/>
+				   	</span>
+				</div>
+				
+				<div class="col-auto">
+					<p:selectOneMenu value="#{libroBean.autor}" effect="fade" filter="true" filterMatchMode="startsWith">
+						<f:selectItem itemLabel="Seleccione el Autor" itemValue=""/>
+						<f:selectItems value="#{autorBean.autors}" var="autor" itemLabel="#{autor.nombre} #{autor.nacionalidad}" itemValue="#{autor.codigo}"/>
+					</p:selectOneMenu>
+				</div>
+				
+				
+		
+				
+				
+				
+				<div class="col-auto">
+					<h:commandButton class="btn btn-primary" action="#{libroBean.addCapitulo()}" value="Agrega" />
+				</div>
+				
+				<div class="container">
+					<p:dataTable value="#{libroBean.capitulos}" var="capitulo">
+						<f:facet name="header">
+				   			Capitulos
+				   		</f:facet>
+				   		
+				   		<p:column headerText="Titulo Capitulo">
+				   			<h:outputText value="#{capitulo.titulo}" />                		
+		            		</p:column>
+		            		
+		            		<p:column headerText="Numero Capitulo">
+				   			<h:outputText value="#{capitulo.numero}" />                		
+		            		</p:column>
+		            		
+		            		
+		            		<p:column headerText="Autor Nombre">
+				   			<h:outputText value="#{capitulo.autor.nombre}" />                		
+		            		</p:column>
+		            		
+		            		<p:column headerText="Autor Nacionalidad">
+				   			<h:outputText value="#{capitulo.autor.nacionalidad}" />                		
+		            		</p:column>
+			   		
+					</p:dataTable>	
+				</div>
+			
+			</div>
+			
+			<h:commandButton class="btn btn-primary btn-lg" action="#{libroBean.addLibro()}" value="Agrega Libro" />
+			
+			<br />
+			
+			</div>
+			
+			<br />
+			
+			<div class="container row g-3 align-items-center border border-3">
+			
+				<div class="col-auto">
+					<span class="ui-float-label">
+				       <p:inputText class="form-control form-control-lg" value="#{libroBean.nameSearch}"/>
+				       <p:outputLabel class="form-label" value="Buscar Libros por Nombre de Autor"/>
+				   	</span>
+				</div>
+				
+				<div class="col-auto">
+					<h:commandButton class="btn btn-primary" action="#{libroBean.searchbyName()}" value="Buscar" />
+				</div>
+				
+				&nbsp;
+				
+				<div class="col-auto">
+					<span class="ui-float-label">
+				       <p:inputText class="form-control form-control-lg" value="#{libroBean.titleSearch}"/>
+				       <p:outputLabel class="form-label" value="Buscar Libros por Titulo"/>
+				   	</span>
+				</div>
+				
+				<div class="col-auto">
+					<h:commandButton class="btn btn-primary" action="#{libroBean.searchbyTitle()}" value="Buscar por Titulo" />
+				</div>
+				
+				<br />
+			
+			</div>
+	
+			<br />
+			
+			<div class="col-auto">
+				<h:commandButton class="btn btn-primary btn-lg" action="#{libroBean.reupdateTheList()}" value="Listar" />
+			</div>
+			
+			<br />
 		   	
-		   	<h5>Nombre</h5>
-		    <span class="ui-float-label">
-		       <p:inputText value="#{libroBean.nombre}"/>
-		       <p:outputLabel value="Nombre Del Libro"/>
-		   	</span>
-		   		   
-		   	<h5>Numero de Paginas</h5>	
-		   	<span class="ui-float-label">
-		       <p:inputText value="#{libroBean.number_pages}"/>
-		       <p:outputLabel value="Numero de paginas"/>
-		   	</span>
 		   	
-		   	<h:commandButton action="#{libroBean.addLibro()}" value="Agrega Libro" />
+		   	<p:dataTable id="dtBooks" var="book" value="#{libroBean.libros}" 
+		   				 reflow="true" paginator="true" rows="10" paginatorPosition="bottom">
+		   	
+			   	<f:facet name="header">
+			   			Libros
+			   	</f:facet>
+			   	
+			   	<p:column headerText="Nombre Libro">
+			   		<h:outputText value="#{book.nombre}" />                		
+	            	</p:column>
+	            	
+	            	<p:column headerText="ISBN">
+			   		<h:outputText value="#{book.ISBN}" />                		
+	            	</p:column>
+			   	
+			   	<p:column headerText="Numero de Paginas">
+			   		<h:outputText value="#{book.numero_paginas}" />                		
+	            	</p:column>
+	            	
+	            	<p:column headerText="Capitulos">
+			   		<h:dataTable id="dtCapitulos" value="#{book.capitulos}" var="chapter">
+			   		
+			   			<p:column headerText="Numero Capitulo">
+			   				<h:outputText value="#{chapter.numero}" />                		
+	            			</p:column>
+	            			
+	            			<p:column headerText="Numero de Paginas">
+			   				<h:outputText value="#{chapter.titulo}" />                		
+	            			</p:column>
+	            			
+	            			<p:column headerText="Autor">
+			   				<h:outputText value="#{chapter.autor.nombre}" />                		
+	            			</p:column>
+	            			
+	            			<p:column headerText="Nacionalidad">
+			   				<h:outputText value="#{chapter.autor.nacionalidad}" />                		
+	            			</p:column>
+			   		
+			   		</h:dataTable>               		
+	            	</p:column>
+            	
+            	
+		   	</p:dataTable>
 			
 		
 		</h:form>
+		
+		<br />
+		
+		<div class="col-auto">
+				   	<a href="/Biblioteca/" class="btn btn-primary">Regresar</a>
+		</div>
+		
+		</div>
+		
 		
 	</h:body>
 </html>

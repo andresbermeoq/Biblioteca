@@ -6,39 +6,73 @@
       xmlns:p="http://primefaces.org/ui">
 
 	<h:head>
+		
 		<title>Autor</title>
+		
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
+		
 	</h:head>
 	
 	<h:body>
-		<h1>Agregar un Autor</h1>
 		
-		<h:form>
+		<div class="container">
+			<div class="container align-items-center">
+				<h1>Crear Autores</h1>
+			</div>
 		
-			<h5>Nombre</h5>
-		    <span class="ui-float-label">
-		       <p:inputText value="#{autorBean.nameAuthor}"/>
-		       <p:outputLabel value="Nombre Del Autor"/>
-		   	</span>
+			<h:form id="form">
+		
+			<div class="container row g-3 align-items-center">
+				<div class="col-auto">
+				    <span class="ui-float-label">
+				       <p:inputText value="#{autorBean.nameAuthor}"/>
+				       <p:outputLabel value="Nombre Del Autor"/>
+				   	</span>
+				</div>
+		
+				<div class="col-auto">
+				    <span class="ui-float-label">
+				       <p:inputText value="#{autorBean.nationalizationAuthor}"/>
+				       <p:outputLabel value="Nacionalidad Del Autor"/>
+				   	</span>
+				</div>
+			
+				<div class="col-auto">
+				   	<p:commandButton class="btn btn-primary" action="#{autorBean.addAuthor()}" value="Agregar Autor" update="dtAuthors"/>
+				</div>
+				
+				<div class="col-auto">
+				   	<a href="/Biblioteca/" class="btn btn-primary">Regresar</a>
+				</div>
+			</div>
+			   	
+		   	<br />
 		   	
-		   	<h5>Nacionalidad</h5>
-		    <span class="ui-float-label">
-		       <p:inputText value="#{autorBean.nationalizationAuthor}"/>
-		       <p:outputLabel value="Nombre Del Autor"/>
-		   	</span>
-		   	
-		   	<h:commandButton action="#{autorBean.addAuthor()}" value="Agregar Autor" />
-		   	
-		   	<p:dataTable var="author" value="#{autorBean.autors}">
+		   	<div class="container">
+		   		<p:dataTable class="table table-sm" id="dtAuthors" widgetVar="dtAuthors" var="author" value="#{autorBean.autors}"
+		   				 reflow="true" paginator="true" rows="10" paginatorPosition="bottom">
+		   				 
+		   		<f:facet name="header">
+		   			Autores
+		   		</f:facet>
+		  
 		   		<p:column headerText="Nombre">
-                		<h:outputText value="#{author.nombre}" />
+		   				<h:outputText value="#{author.nombre}" />                		
             		</p:column>
             		
             		<p:column headerText="Nacionalidad">
                 		<h:outputText value="#{author.nacionalidad}" />
             		</p:column>
 		   		
-		   	</p:dataTable>
+		   		</p:dataTable>
+		   	</div>
+		   	
+		   	
 			
-		</h:form>
+			</h:form>
+		
+		
+		</div>
+		
 	</h:body>
 </html>
