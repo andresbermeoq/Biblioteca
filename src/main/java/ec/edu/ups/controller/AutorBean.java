@@ -1,6 +1,7 @@
 package ec.edu.ups.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -10,8 +11,6 @@ import javax.inject.Named;
 
 import ec.edu.ups.ejb.AutorFacade;
 import ec.edu.ups.model.Autor;
-
-
 
 @FacesConfig(version = FacesConfig.Version.JSF_2_3)
 @Named
@@ -25,6 +24,7 @@ public class AutorBean implements Serializable {
 	
 	private String nameAuthor;
 	private String nationalizationAuthor;
+	private List<Autor> autors;
 
 	public AutorBean() {
 		
@@ -32,7 +32,7 @@ public class AutorBean implements Serializable {
 	
 	@PostConstruct
 	public void init() {
-		
+		autors = autorFacade.findAll();
 	}
 	
 	public AutorFacade getAutorFacade() {
@@ -57,6 +57,14 @@ public class AutorBean implements Serializable {
 	public String addAuthor() {
 		autorFacade.create(new Autor(this.nameAuthor, this.nationalizationAuthor));
 		return null;
+	}
+
+	public List<Autor> getAutors() {
+		return autors;
+	}
+
+	public void setAutors(List<Autor> autors) {
+		this.autors = autors;
 	}
 
 }

@@ -27,6 +27,17 @@
 		   	</span>
 		   	
 		   	<h:commandButton action="#{autorBean.addAuthor()}" value="Agregar Autor" />
+		   	
+		   	<p:dataTable var="author" value="#{autorBean.autors}">
+		   		<p:column headerText="Nombre">
+                		<h:outputText value="#{author.nombre}" />
+            		</p:column>
+            		
+            		<p:column headerText="Nacionalidad">
+                		<h:outputText value="#{author.nacionalidad}" />
+            		</p:column>
+		   		
+		   	</p:dataTable>
 			
 		</h:form>
 	</h:body>

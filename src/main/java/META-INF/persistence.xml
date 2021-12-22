@@ -3,8 +3,10 @@
 	<persistence-unit name="Biblioteca" transaction-type="JTA">
 		<jta-data-source>jdbc/__Libros</jta-data-source>
 		<class>ec.edu.ups.model.Autor</class>
+		<class>ec.edu.ups.model.Libro</class>
+		<class>ec.edu.ups.model.Capitulo</class>
 		<properties>
-			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
 			<property name="eclipselink.ddl-generation.output-mode" value="database" />
 		</properties>
 	</persistence-unit>

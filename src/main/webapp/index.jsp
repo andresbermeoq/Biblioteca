@@ -12,5 +12,6 @@
         
         
         <a href="/Biblioteca/faces/AddAutor.xhtml">Autor</a>
+        <a href="/Biblioteca/faces/AddBook.xhtml">Libros</a>
     </body>
 </html>

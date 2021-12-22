@@ -14,11 +14,14 @@ public class Autor implements Serializable {
 
 	   
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Integer codigo;
 	private String Nombre;
 	private String Nacionalidad;
 	private static final long serialVersionUID = 1L;
+	
+	@OneToOne(mappedBy = "autor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private Capitulo capitulo;
 
 	public Autor() {
 		super();

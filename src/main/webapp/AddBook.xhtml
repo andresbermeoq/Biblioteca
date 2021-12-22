@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<title>Ingreso de Libros</title>
+	</h:head>
+	
+	<h:body>
+		<h1>Agrega un Libro</h1>
+		
+		
+		<h:form>
+		
+			<h5>Numero del Capitulo</h5>
+		    <span class="ui-float-label">
+		       <p:inputText value="#{libroBean.number}"/>
+		       <p:outputLabel value="Numbero Del Capitulo"/>
+		   	</span>
+		   	
+		   	<h5>Nombre</h5>
+		    <span class="ui-float-label">
+		       <p:inputText value="#{libroBean.title}"/>
+		       <p:outputLabel value="Titulo Del Capitulo"/>
+		   	</span>
+		   		   
+		   	<h5>Autor</h5>	
+			<p:selectOneMenu value="#{libroBean.autor}">
+				<f:selectItem itemLabel="Select One" itemValue=""/>
+				<f:selectItems value="#{autorBean.autors}" var="autor" itemLabel="#{autor.nombre}" itemValue="#{autor.codigo}"/>
+			</p:selectOneMenu>
+		
+			<h:commandButton action="#{libroBean.addCapitulo()}" value="Agrega" />
+			
+			<h5>ISBN</h5>
+		    <span class="ui-float-label">
+		       <p:inputText value="#{libroBean.isbn}"/>
+		       <p:outputLabel value="ISBN"/>
+		   	</span>
+		   	
+		   	<h5>Nombre</h5>
+		    <span class="ui-float-label">
+		       <p:inputText value="#{libroBean.nombre}"/>
+		       <p:outputLabel value="Nombre Del Libro"/>
+		   	</span>
+		   		   
+		   	<h5>Numero de Paginas</h5>	
+		   	<span class="ui-float-label">
+		       <p:inputText value="#{libroBean.number_pages}"/>
+		       <p:outputLabel value="Numero de paginas"/>
+		   	</span>
+		   	
+		   	<h:commandButton action="#{libroBean.addLibro()}" value="Agrega Libro" />
+			
+		
+		</h:form>
+		
+	</h:body>
+</html>
